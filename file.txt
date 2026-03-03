@@ -1,0 +1,101 @@
+ADD{AUDIO{filename=auefile, date= 02.03.2026, bitrate =hui_ego_ebet, duration = 2:30}}
+ADD{VIDEO{filename=aue2, date=01.03.2026, resolution=1920x1080, frame_rate = 30}}
+ADD{IMAGE{filename=Jahmal_TGK, date = 01.03.2026, resolution = 1920x1080, format=json}}
+ADD{AUDIO{filename=auefile, date= 02.03.2026, bitrate =hui_ego_ebet, duration = 2:30}}
+ADD{VIDEO{filename=aue2, date=01.03.2026, resolution=1920x1080, frame_rate = 30}}
+PRINT
+ADD{IMAGE{filename=Jahmal_TGK, date = 01.03.2026, resolution = 1920x1080, format=json}}
+
+
+
+ADD{AUDIO{filename=auefile, date= 02.03.2026, bitrate =hui_ego_ebet, duration = 2:30}}
+ADD{VIDEO{filename=aue2, date=01.03.2026, resolution=1920x1080, frame_rate = 30}}
+PRINT
+ADD{IMAGE{filename=Jahmal_TGK, date = 01.03.2026, resolution = 1920x1080, format=json}}
+REM{filename = aue2}
+
+REM{resolution = 1920x1080}
+
+
+
+
+ADD{AUDIO{filename=auefile, date= 02.03.2026, bitrate =hui_ego_ebet, duration = 2:30}}
+ADD{VIDEO{filename=aue2, date=01.03.2026, resolution=1920x1080, frame_rate = 30}}
+ADD{IMAGE{filename=Jahmal_TGK, date = 01.03.2026, resolution = 1920x1080, format=json}}
+ADD{AUDIO{filename=auefile, date= 02.03.2026, bitrate =hui_ego_ebet, duration = 2:30}}
+
+
+
+
+REM{filename=f1}
+REM{date=04.03.2026}
+REM{bitrate=123}
+REM{duration=201}
+REM{frame_rate = 60}
+REM{resolution<150x200}
+REM{format=json}
+
+
+
+audiof::check_arg_for_del(dict& arg)
+{
+    if (arg.arg_ == "filename")
+    {
+        return check_by_name(arg);
+    } else if (arg.arg_ == "date")
+    {
+        return check_by_date(arg);
+    } else if (arg.arg_ == "type")
+    {
+        return check_by_type(arg);
+    } else if (arg.arg_ == "bitrate")
+    {
+        return check_by_bitr(arg);
+    } else if (arg.arg_ == "duration")
+    {
+        return check_by_dur(arg);
+    } else
+        return false;
+} ok
+
+imagef::check_arg_for_del(dict& arg)
+{
+    if (arg.arg_ == "filename")
+    {
+        return check_by_flnm(arg);
+    } else if (arg.arg_ == "date")
+    {
+        return check_by_date(arg);
+    } else if (arg.arg_ == "type")
+    {
+        return check_by_type(arg);
+    } else if (arg.arg_ == "resolution")
+    {
+        return check_by_res(arg);
+    } else if (arg.arg_ == "format")
+    {
+        return check_by_format(arg);
+    } else
+        return false;
+}
+
+bool videof::check_arg_for_del(dict& arg)
+{
+    if (arg.arg_ == "filename")
+    {
+        return check_by_flnm(arg);
+    } else if (arg.arg_ == "date")
+    {
+        return check_by_date(arg);
+    } else if (arg.arg_ == "type")
+    {
+        return check_by_type(arg);
+    } else if (arg.arg_ == "resolution")
+    {
+        return check_by_res(arg);
+    } else if (arg.arg_ == "frame_rate")
+    {
+        return check_by_fr_rt(arg);
+    } else
+        return false;
+}
