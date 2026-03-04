@@ -20,17 +20,17 @@ void upload_commands(container &cont)
 int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "ru_RU.UTF-8");
- 
-    int cd;
-    bool ext_f = true;
-    container cont;
 
     try
     {
+        int cd;
+        bool ext_f = true;
+        container cont;
+
         while (ext_f)
         {
             printf("Выберите действие:\n1)Отобразить контейнер\n2)Загрузить файл команд\n3)закрыть программу\n");
-            scanf_s("%d", (int*)&cd);
+            scanf_s("%d", &cd);
 
             switch(cd)
             {
