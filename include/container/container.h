@@ -21,8 +21,6 @@ public:
     void push(std::unique_ptr<filesAVI> file);
 
     void rem(dict& arg);
-      
-    void display();
 
     size_t size();
 

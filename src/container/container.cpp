@@ -4,11 +4,6 @@ void container::push(std::unique_ptr<filesAVI> file)
 {
     this->files.push_back(std::move(file));
 }
-    
-void container::display()
-{
-    //code..
-}
 
 filesAVI* container::at(int indx)
 {
