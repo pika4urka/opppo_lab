@@ -1,12 +1,12 @@
 #include "files/filesAVI.h"
 
 
-std::string filesAVI::get_filename()
+const std::string& filesAVI::get_filename() const
 {
     return filename;
 }
 
-std::string filesAVI::get_date()
+const std::string& filesAVI::get_date() const
 {
     return date;
 }

@@ -12,13 +12,13 @@ protected:
     std::string date;
  
 public:
-    filesAVI(const std::string filename_, const std::string date_) :
+    filesAVI(const std::string& filename_, const std::string& date_) :
         filename(filename_), date(date_) {}
 
-    std::string get_filename();
+    const std::string& get_filename() const;
     //getter of filename
 
-    std::string get_date();
+    const std::string& get_date() const;
     //getter of the last change date
 
     //virtual void display();

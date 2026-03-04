@@ -1,12 +1,12 @@
 #include "files/videof.h"
 
 
-std::string videof::get_res()
+const std::string& videof::get_res() const
 {
     return res;
 }
 
-std::string videof::get_frame_rate()
+const std::string& videof::get_frame_rate() const
 {
     return fr_rt;
 }
@@ -15,7 +15,7 @@ bool videof::check_arg_for_del(dict& arg)
 {
     if (arg.arg_ == "filename")
     {
-        return check_by_flnm(arg);
+        return check_by_name(arg);
     } else if (arg.arg_ == "date")
     {
         return check_by_date(arg);
@@ -32,22 +32,22 @@ bool videof::check_arg_for_del(dict& arg)
         return false;
 }
 
-bool videof::check_by_flnm(dict& arg)
+bool videof::check_by_name(const dict& arg)
 {
     return (this->filename == arg.val_)? true : false;
 }
 
-bool videof::check_by_date(dict& arg)
+bool videof::check_by_date(const dict& arg)
 {
     return (this->date == arg.val_)? true : false;
 }
 
-bool videof::check_by_type(dict& arg)
+bool videof::check_by_type(const dict& arg)
 {
     return (arg.val_ == "VIDEO")? true : false;
 }
 
-bool videof::check_by_res(dict& arg)
+bool videof::check_by_res(const dict& arg)
 {
     pairVals pr1, pr2;
     utils::parser_resolution(pr1, this->res);
@@ -64,7 +64,7 @@ bool videof::check_by_res(dict& arg)
         
 } //<>=
 
-bool videof::check_by_fr_rt(dict& arg)
+bool videof::check_by_fr_rt(const dict& arg)
 {
     printf("\narg.val: %s\n", arg.val_.c_str());
     utils::check_num(arg.val_.c_str());

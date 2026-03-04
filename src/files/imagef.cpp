@@ -1,12 +1,12 @@
 #include "files/imagef.h"
 
 
-std::string imagef::get_res()
+const std::string& imagef::get_res() const
 {
     return res;
 }
 
-std::string imagef::get_format()
+const std::string& imagef::get_format() const
 {
     return format;
 }
@@ -15,7 +15,7 @@ bool imagef::check_arg_for_del(dict& arg)
 {
     if (arg.arg_ == "filename")
     {
-        return check_by_flnm(arg);
+        return check_by_name(arg);
     } else if (arg.arg_ == "date")
     {
         return check_by_date(arg);
@@ -32,22 +32,22 @@ bool imagef::check_arg_for_del(dict& arg)
         return false;
 }
 
-bool imagef::check_by_flnm(dict& arg)
+bool imagef::check_by_name(const dict& arg)
 {
     return (arg.val_ == this->filename)? true : false;
 }
 
-bool imagef::check_by_date(dict& arg)
+bool imagef::check_by_date(const dict& arg)
 {
     return (arg.val_ == this->date)? true : false;
 }
 
-bool imagef::check_by_type(dict& arg)
+bool imagef::check_by_type(const dict& arg)
 {
     return (arg.val_ == "IMAGE")? true : false;
 }
 
-bool imagef::check_by_res(dict& arg)
+bool imagef::check_by_res(const dict& arg)
 {
     pairVals pr1, pr2;
     utils::parser_resolution(pr1, this->res);
@@ -64,7 +64,7 @@ bool imagef::check_by_res(dict& arg)
         
 } //<>=
 
-bool imagef::check_by_format(dict& arg)
+bool imagef::check_by_format(const dict& arg)
 {
     return (arg.val_ == this->format)? true : false;
 }

@@ -1,12 +1,12 @@
 #include "files/audiof.h"
 
 
-std::string audiof::get_bitrate()
+const std::string& audiof::get_bitrate() const
 {
     return bitrate;
 }
 
-std::string audiof::get_duration()
+const std::string& audiof::get_duration() const
 {
     return duration;
 }
@@ -32,22 +32,22 @@ bool audiof::check_arg_for_del(dict& arg)
         return false;
 }
 
-bool audiof::check_by_name(dict& arg)
+bool audiof::check_by_name(const dict& arg)
 {
     return (arg.val_ == this->filename)? true : false;
 }
 
-bool audiof::check_by_date(dict& arg)
+bool audiof::check_by_date(const dict& arg)
 {
     return (arg.val_ == this->date)? true : false;
 }
 
-bool audiof::check_by_type(dict& arg)
+bool audiof::check_by_type(const dict& arg)
 {
     return (arg.val_ == "AUDIO")? true : false;
 }
 
-bool audiof::check_by_bitr(dict& arg)
+bool audiof::check_by_bitr(const dict& arg)
 {
     if (arg.oprt_ == '=')
         return utils::check_equal(this->bitrate.c_str(), arg.val_.c_str());
@@ -60,7 +60,7 @@ bool audiof::check_by_bitr(dict& arg)
         
 } //<>=
 
-bool audiof::check_by_dur(dict& arg)
+bool audiof::check_by_dur(const dict& arg)
 {
     //printf("\noperator: %c\n", arg.oprt_);
     if (arg.oprt_ == '=')
