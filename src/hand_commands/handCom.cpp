@@ -5,9 +5,10 @@ void modific_com(std::string &com)
     com.erase(std::remove(com.begin(), com.end(), ' '), com.end());
 }
 
-dict parser_arg(std::string &arg, char* key)
+dict parser_arg(const std::string &arg, const char* key)
 {
     dict dictionary;
+    dictionary.oprt_ = '\0';
 
     for (size_t i = 0; i < arg.size(); i++)
     {
@@ -17,15 +18,17 @@ dict parser_arg(std::string &arg, char* key)
             dictionary.arg_ = arg.substr(0, i);
             dictionary.val_ = arg.substr(i + 1);
             dictionary.oprt_ = symb;
-            if ((key == "add")&&(symb != '='))
+            if ((strcmp(key, "add") == 0)&&(symb != '='))
                 throw std::invalid_argument("Invalid operator in the ADD statement. Expcted \"=\"");
             break;
         }
     }
+    if (dictionary.oprt_ == '\0')
+        throw std::invalid_argument("Invalid argument. Expected operator (=\\<\\>)");
     return dictionary;
 }
 
-void get_args(std::string &instr_args, std::vector<dict> &vargs, int indx, char* key)
+void get_args(const std::string &instr_args, std::vector<dict> &vargs, int indx, const char* key)
 {
     int sz = instr_args.size();
     for (int i = indx; i < sz; i++)
@@ -46,10 +49,10 @@ void get_args(std::string &instr_args, std::vector<dict> &vargs, int indx, char*
         throw std::invalid_argument("lot of arguments");
 }
 
-void add_audio(container &cont, std::vector<dict> &args)
+void add_audio(container &cont, const std::vector<dict> &args)
 {
     std::string filename, date, bitrate, duration;
-    for (auto& i : args)
+    for (const auto& i : args)
     {
         if (i.arg_ == "filename")
             filename = i.val_;
@@ -67,10 +70,10 @@ void add_audio(container &cont, std::vector<dict> &args)
     cont.push(std::make_unique<audiof>(filename, date, bitrate, duration));
 }
 
-void add_video(container &cont, std::vector<dict> &args)
+void add_video(container &cont, const std::vector<dict> &args)
 {
     std::string filename, date, resolution, frame_rate;
-    for (auto i : args)
+    for (const auto& i : args)
     {
         if (i.arg_ == "filename")
             filename = i.val_;
@@ -88,10 +91,10 @@ void add_video(container &cont, std::vector<dict> &args)
     cont.push(std::make_unique<videof>(filename, date, resolution, frame_rate));
 }
 
-void add_image(container &cont, std::vector<dict> &args)
+void add_image(container &cont, const std::vector<dict> &args)
 {
     std::string filename, date, resolution, format;
-    for (auto i : args)
+    for (const auto& i : args)
     {
         if (i.arg_ == "filename")
             filename = i.val_;
@@ -124,7 +127,7 @@ void test_funk(std::vector<dict> vargs_test)            //TEST
 }
 #endif //check args in cont
 
-void instr_add(container &cont, std::string &com)
+void instr_add(container &cont, const std::string &com)
 {
     if (com.compare(com.size() - 2, 2, "}}") != 0)
         throw std::invalid_argument("invalid syntax. Expected \"}}\"");
@@ -133,17 +136,17 @@ void instr_add(container &cont, std::string &com)
 
     if (com.compare(4, 5, "AUDIO") == 0)
     {
-        get_args(com, args, 10, (char*)"add");
+        get_args(com, args, 10, "add");
         add_audio(cont, args);
     }
     else if (com.compare(4, 5, "VIDEO") == 0)
     {
-        get_args(com, args, 10, (char*)"add");
+        get_args(com, args, 10, "add");
         add_video(cont, args);
     }
     else if (com.compare(4, 5, "IMAGE") == 0)
     {
-        get_args(com, args, 10, (char*)"add");
+        get_args(com, args, 10, "add");
         add_image(cont, args);
     }
     else
@@ -152,7 +155,7 @@ void instr_add(container &cont, std::string &com)
     //test_funk(args);
 }
 
-void instr_rem(container &cont, std::string &com)
+void instr_rem(container &cont, const std::string &com)
 {
     if (com.compare(com.size() - 1, 1, "}") != 0)
         throw std::invalid_argument("invalid syntax.  Expected \"}\"");
@@ -173,15 +176,15 @@ void instr_print(container& cont)
     if (sz == 0)
         return;
     //     throw std::invalid_argument("There are no objects in the container");
-    filesAVI* file;
+    
 
     for (int i = 0; i < sz; i++)
     {
-        file = cont.at(i);
+        filesAVI* file = cont.at(i);
         
         if (dynamic_cast<audiof*>(file))
         {
-            auto* audiofile = dynamic_cast<audiof*>(file);
+            const auto* audiofile = dynamic_cast<const audiof*>(file);
             std::cout << "\naudio\n";
             printf("name: %s\ndate: %s\nbitr: %s\ndur: %s\n\n", 
                 audiofile->get_filename().c_str(),
@@ -191,7 +194,7 @@ void instr_print(container& cont)
             );
         } else if (dynamic_cast<videof*>(file))
         {
-            auto* audiofile = dynamic_cast<videof*>(file);
+            const auto* audiofile = dynamic_cast<const videof*>(file);
             std::cout << "\nvideo\n";
             printf("name: %s\ndate: %s\nfr_rate: %s\nres: %s\n\n", 
                 audiofile->get_filename().c_str(),
@@ -201,7 +204,7 @@ void instr_print(container& cont)
             );
         } else if (dynamic_cast<imagef*>(file))
         {
-            auto* audiofile = dynamic_cast<imagef*>(file);
+            const auto* audiofile = dynamic_cast<const imagef*>(file);
             std::cout << "\nimage\n";
             printf("name: %s\ndate: %s\nformat: %s\nres: %s\n\n", 
                 audiofile->get_filename().c_str(),
