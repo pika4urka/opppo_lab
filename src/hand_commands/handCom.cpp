@@ -219,7 +219,7 @@ void instr_print(container& cont)
     }
 }
 
-void handCom::exect_com(container &cont, std::string &com)
+void handCom::exect_com(container &cont, std::string com)
 {
     modific_com(com);
     int size_instr = 0;

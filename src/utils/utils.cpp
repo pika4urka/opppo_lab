@@ -3,6 +3,8 @@
 void utils::check_num(const char* str)
 {
     int i = 0; //counter
+    if(*(str + 0) == '\0')
+        throw std::invalid_argument("invalid num empty val");
     while(*(str + i) != '\0')
     {
         if (((int)*(str + i) < 48) || ((int)*(str + i) > 57))
@@ -60,6 +62,8 @@ bool utils::check_equal(const char* f_num, const char* s_num)
 void utils::parser_resolution(pairVals& pr, const std::string& str)
 {
     int i = 0;
+    if (str.size() == 0)
+        throw std::invalid_argument("invalid resolution empty");
     while(str.at(i++) != 'x')
         if ((i == str.size() - 1)||(str.at(0) == 0))
             throw std::invalid_argument("invalid resolution");

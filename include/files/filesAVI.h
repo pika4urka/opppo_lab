@@ -12,7 +12,7 @@ protected:
     std::string date;
  
 public:
-    filesAVI(const std::string& filename_, const std::string& date_) :
+    filesAVI(const std::string filename_, const std::string date_) :
         filename(filename_), date(date_) {}
 
     const std::string& get_filename() const;

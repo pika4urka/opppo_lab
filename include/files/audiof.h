@@ -20,10 +20,13 @@ class audiof : public filesAVI
     bool check_by_dur(const dict& arg);
 
 public:
-    audiof(const std::string& filename_, const std::string& date_,
-        std::string& bitrate_, std::string& duration_) :
+    audiof(const std::string filename_, const std::string date_,
+        std::string bitrate_, std::string duration_) :
         filesAVI(filename_, date_), bitrate(bitrate_), duration(duration_) 
-        {}
+        {
+            utils::check_num(bitrate_.c_str());
+            utils::check_num(duration.c_str());
+        }
 
     const std::string& get_bitrate() const;
     

@@ -66,7 +66,7 @@ bool videof::check_by_res(const dict& arg)
 
 bool videof::check_by_fr_rt(const dict& arg)
 {
-    printf("\narg.val: %s\n", arg.val_.c_str());
+    // printf("\narg.val: %s\n", arg.val_.c_str());
     utils::check_num(arg.val_.c_str());
     if (arg.oprt_ == '=')
         return utils::check_equal(this->fr_rt.c_str(), arg.val_.c_str());

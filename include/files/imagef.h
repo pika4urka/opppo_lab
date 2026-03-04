@@ -20,8 +20,8 @@ class imagef : public filesAVI
     bool check_by_format(const dict& arg);
 
 public:
-    imagef(const std::string& filename_, const std::string& date_,
-        std::string& format_, std::string& res_) :
+    imagef(const std::string filename_, const std::string date_,
+        std::string format_, std::string res_) :
         filesAVI(filename_, date_), res(res_), format(format_)
         {}
 

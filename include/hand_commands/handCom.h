@@ -6,10 +6,11 @@
 #include <stdexcept>
 #include <string>
 #include "utils/utils.h"
+#include <cstring>
 
 namespace handCom
 {
-    void exect_com(container &cont, std::string& com_line);
+    void exect_com(container &cont, std::string com_line);
 }
 
 #endif //_HAND_COMMANDS_
