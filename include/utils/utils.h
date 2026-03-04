@@ -23,13 +23,13 @@ namespace utils
     void check_num(const char* str);
     //checking for a numbers
 
-    void parser_resolution(pairVals& pr, std::string& str);
+    void parser_resolution(pairVals& pr, const std::string& str);
 
-    void parser_duration(pairVals& pr, std::string& str);
+    //void parser_duration(pairVals& pr, std::string& str);
 
-    int mult(std::string& str1, std::string& str2);
+    int mult(const std::string& str1, const std::string& str2);
 
-    void check_str(const char* str);
+    //void check_str(const char* str);
     //checking for a string
 
     bool check_less(const char* f_num, const char* s_num);
